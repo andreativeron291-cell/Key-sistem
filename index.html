@@ -46,6 +46,8 @@
         .btn-no:hover { background-color: #f44336; }
         .btn-success { background-color: #00c853; }
         .btn-success:hover { background-color: #00e676; }
+        .btn-ad { background-color: #ff9800; color: #000; }
+        .btn-ad:hover { background-color: #ffb74d; }
         .hidden { display: none; }
         input {
             width: 100%;
@@ -58,25 +60,6 @@
             text-align: center;
             font-size: 16px;
         }
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* Proporzione 16:9 */
-            height: 0;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
     </style>
 </head>
 <body>
@@ -88,17 +71,17 @@
         <button class="btn btn-no" onclick="sceltaNo()">No</button>
     </div>
 
-    <!-- STEP 2: Schermata con il video della pubblicità -->
+    <!-- STEP 2: Link e visualizzazione Spot -->
     <div class="card hidden" id="step2">
         <h2>Spot Ufficiale</h2>
-        <p>Guarda la pubblicità qui sotto e poi clicca per ottenere la key.</p>
+        <p>Clicca sul pulsante qui sotto per aprire e guardare la pubblicità di Enrico Papi su YouTube:</p>
         
-        <!-- Video di YouTube incorporato dello spot di Enrico Papi / NoiCompriamoAuto -->
-        <div class="video-container">
-            <iframe src="https://youtu.be/jjcCdIkr_TY?is=ZPYlSvkjxCiu_qNO" title="NoiCompriamoAuto Enrico Papi" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+        <!-- Link diretto allo spot che si apre senza errori -->
+        <a href="https://www.youtube.com/watch?v=jlE3JQmH_G4" target="_blank" class="btn btn-ad">▶ Guarda lo spot di Enrico Papi</a>
 
-        <button class="btn btn-success" onclick="mostraKey()">Ottieni la Key</button>
+        <p style="font-size: 12px; margin-top: 15px; color: #888;">Dopo aver guardato lo spot, torna qui e clicca sul tasto verde per riscattare la key.</p>
+
+        <button class="btn btn-success" style="margin-top: 10px;" onclick="mostraKey()">Ottieni la Key</button>
     </div>
 
     <!-- STEP 3: Mostra la Key -->
@@ -130,6 +113,7 @@
             copyText.select();
             copyText.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(copyText.value);
+            document.getElementById("msgCopia");
             document.getElementById("msgCopia").innerText = "Key copiata negli appunti!";
         }
     </script>
