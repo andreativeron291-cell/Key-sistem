@@ -21,7 +21,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             text-align: center;
-            max-width: 400px;
+            max-width: 420px;
             width: 100%;
         }
         h2 { margin-bottom: 15px; font-size: 19px; }
@@ -59,18 +59,23 @@
             font-size: 16px;
         }
         .video-container {
+            position: relative;
             width: 100%;
+            padding-bottom: 56.25%; /* Proporzione 16:9 */
+            height: 0;
             margin-top: 15px;
             margin-bottom: 15px;
             background: #000;
             border-radius: 8px;
             overflow: hidden;
         }
-        video {
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -78,27 +83,22 @@
 
     <!-- STEP 1: Scelta Sì / No -->
     <div class="card" id="step1">
-        <h2>Vuoi guardare la pubblicità di Enrico Papi (NoiCompriamoAuto.it) per ottenere la Key?</h2>
+        <h2>Vuoi guardare la pubblicità di NoiCompriamoAuto.it con Enrico Papi per ottenere la Key?</h2>
         <button class="btn" onclick="mostraPubblicita()">Sì</button>
         <button class="btn btn-no" onclick="sceltaNo()">No</button>
     </div>
 
-    <!-- STEP 2: Schermata Pubblicità con Video Diretto -->
+    <!-- STEP 2: Schermata con il video della pubblicità -->
     <div class="card hidden" id="step2">
-        <h2>Spot Pubblicitario</h2>
-        <p>Guarda la pubblicità di Enrico P. qui sotto. Il tasto per la key apparirà alla fine dello spot!</p>
+        <h2>Spot Ufficiale</h2>
+        <p>Guarda la pubblicità qui sotto e poi clicca per ottenere la key.</p>
         
-        <!-- Video nativo dello spot -->
+        <!-- Video di YouTube incorporato dello spot di Enrico Papi / NoiCompriamoAuto -->
         <div class="video-container">
-            <video id="adsVideo" controls autoplay>
-                <source src="https://www.youtube.com/embed/jjcCdIkr_TY" type="video/mp4">
-                <!-- Fallback link diretto video se il browser richiede file diretto -->
-                Il tuo browser non supporta il video.
-            </video>
+            <iframe src="https://www.youtube-nocookie.com/embed/Q4mD6aK4pYQ" title="NoiCompriamoAuto Enrico Papi" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-        <p id="timerText" style="color: #ff9800; font-weight: bold;">Caricamento spot in corso...</p>
-        <button class="btn btn-success hidden" id="btnKey" onclick="mostraKey()">Ottieni la Key</button>
+        <button class="btn btn-success" onclick="mostraKey()">Ottieni la Key</button>
     </div>
 
     <!-- STEP 3: Mostra la Key -->
@@ -118,19 +118,6 @@
         function mostraPubblicita() {
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
-
-            // Timer di sicurezza di 6 secondi per simulare la visione dello spot
-            let secondi = 6;
-            let timerInterval = setInterval(function() {
-                secondi--;
-                if (secondi > 0) {
-                    document.getElementById('timerText').innerText = "Attendi " + secondi + " secondi per continuare...";
-                } else {
-                    clearInterval(timerInterval);
-                    document.getElementById('timerText').style.display = 'none';
-                    document.getElementById('btnKey').classList.remove('hidden');
-                }
-            }, 1000);
         }
 
         function mostraKey() {
