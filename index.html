@@ -46,7 +46,6 @@
         .btn-success:hover { background-color: #00e676; }
         .hidden { display: none; }
         
-        /* Stile verifica bot */
         .captcha-box {
             background-color: #252525;
             border: 1px solid #444;
@@ -95,7 +94,7 @@
 </head>
 <body>
 
-    <!-- STEP 1: Verifica Umano -->
+    <!-- STEP 1 -->
     <div class="card" id="step1">
         <h2>Verifica di sicurezza</h2>
         <p>Completa la verifica per dimostrare che non sei un bot e procedere.</p>
@@ -111,7 +110,7 @@
         <button class="btn btn-success hidden" id="btnProsegui" onclick="mostraKey()">Ottieni la Key</button>
     </div>
 
-    <!-- STEP 2: Mostra la Key -->
+    <!-- STEP 2 -->
     <div class="card hidden" id="step2">
         <h2>Ecco la tua Key!</h2>
         <input type="text" id="keyInput" value="ANDRE_29_KEY" readonly>
@@ -130,7 +129,6 @@
                 text.innerText = "Verificato con successo";
                 text.style.color = "#00c853";
                 
-                // Mostra il pulsante per avanzare
                 setTimeout(function() {
                     document.getElementById('btnProsegui').classList.remove('hidden');
                 }, 400);
