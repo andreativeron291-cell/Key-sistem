@@ -59,23 +59,18 @@
             font-size: 16px;
         }
         .video-container {
-            position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* Proporzione 16:9 */
-            height: 0;
             margin-top: 15px;
             margin-bottom: 15px;
             background: #000;
             border-radius: 8px;
             overflow: hidden;
         }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        video {
             width: 100%;
-            height: 100%;
-            border: none;
+            height: auto;
+            display: block;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -88,17 +83,21 @@
         <button class="btn btn-no" onclick="sceltaNo()">No</button>
     </div>
 
-    <!-- STEP 2: Schermata Pubblicità con il video vero -->
+    <!-- STEP 2: Schermata Pubblicità con Video Diretto -->
     <div class="card hidden" id="step2">
         <h2>Spot Pubblicitario</h2>
-        <p>Guarda la pubblicità di Enrico Papi qui sotto. Il tasto per la key apparirà a breve!</p>
+        <p>Guarda la pubblicità di Enrico P. qui sotto. Il tasto per la key apparirà alla fine dello spot!</p>
         
-        <!-- Video incorporato corretto dello spot di Enrico Papi -->
+        <!-- Video nativo dello spot -->
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/jlE3JQmH_G4?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <video id="adsVideo" controls autoplay>
+                <source src="https://www.youtube.com/embed/jjcCdIkr_TY" type="video/mp4">
+                <!-- Fallback link diretto video se il browser richiede file diretto -->
+                Il tuo browser non supporta il video.
+            </video>
         </div>
 
-        <p id="timerText" style="color: #ff9800; font-weight: bold;">Attendi la fine dello spot (6 secondi)...</p>
+        <p id="timerText" style="color: #ff9800; font-weight: bold;">Caricamento spot in corso...</p>
         <button class="btn btn-success hidden" id="btnKey" onclick="mostraKey()">Ottieni la Key</button>
     </div>
 
@@ -120,12 +119,12 @@
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
 
-            // Conto alla rovescia di 6 secondi per simulare la visione dello spot
+            // Timer di sicurezza di 6 secondi per simulare la visione dello spot
             let secondi = 6;
             let timerInterval = setInterval(function() {
                 secondi--;
                 if (secondi > 0) {
-                    document.getElementById('timerText').innerText = "Attendi " + secondi + " secondi...";
+                    document.getElementById('timerText').innerText = "Attendi " + secondi + " secondi per continuare...";
                 } else {
                     clearInterval(timerInterval);
                     document.getElementById('timerText').style.display = 'none';
