@@ -24,7 +24,7 @@
             max-width: 400px;
             width: 100%;
         }
-        h2 { margin-bottom: 15px; font-size: 20px; }
+        h2 { margin-bottom: 15px; font-size: 19px; }
         p { font-size: 14px; color: #b0b0b0; }
         .btn {
             background-color: #6200ee;
@@ -88,17 +88,17 @@
         <button class="btn btn-no" onclick="sceltaNo()">No</button>
     </div>
 
-    <!-- STEP 2: Schermata Pubblicità con Enrico Papi -->
+    <!-- STEP 2: Schermata Pubblicità con il video vero -->
     <div class="card hidden" id="step2">
-        <h2>Messaggio Promozionale</h2>
-        <p>Gusta la pubblicità di Enrico Papi! Dopodiché potrai riscattare la tua key.</p>
+        <h2>Spot Pubblicitario</h2>
+        <p>Guarda la pubblicità di Enrico Papi qui sotto. Il tasto per la key apparirà a breve!</p>
         
-        <!-- Video incorporato di YouTube con la pubblicità di NoiCompriamoAuto / Enrico Papi -->
+        <!-- Video incorporato corretto dello spot di Enrico Papi -->
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/Q4mD6aK4pYQ?autoplay=1&mute=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/jlE3JQmH_G4?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-        <p id="timerText" style="color: #ff9800; font-weight: bold;">Attendi 5 secondi...</p>
+        <p id="timerText" style="color: #ff9800; font-weight: bold;">Attendi la fine dello spot (6 secondi)...</p>
         <button class="btn btn-success hidden" id="btnKey" onclick="mostraKey()">Ottieni la Key</button>
     </div>
 
@@ -120,8 +120,8 @@
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
 
-            // Timer di 5 secondi per simulare la visione dello spot pubblicitario
-            let secondi = 5;
+            // Conto alla rovescia di 6 secondi per simulare la visione dello spot
+            let secondi = 6;
             let timerInterval = setInterval(function() {
                 secondi--;
                 if (secondi > 0) {
