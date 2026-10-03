@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key System</title>
+    <title>Key System - NoiCompriamoAuto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,10 +21,11 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             text-align: center;
-            max-width: 350px;
+            max-width: 400px;
             width: 100%;
         }
-        h2 { margin-bottom: 20px; font-size: 22px; }
+        h2 { margin-bottom: 15px; font-size: 20px; }
+        p { font-size: 14px; color: #b0b0b0; }
         .btn {
             background-color: #6200ee;
             color: white;
@@ -37,10 +38,14 @@
             width: 100%;
             font-weight: bold;
             transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn:hover { background-color: #7c4dff; }
         .btn-no { background-color: #d32f2f; }
         .btn-no:hover { background-color: #f44336; }
+        .btn-success { background-color: #00c853; }
+        .btn-success:hover { background-color: #00e676; }
         .hidden { display: none; }
         input {
             width: 100%;
@@ -53,21 +58,51 @@
             text-align: center;
             font-size: 16px;
         }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Proporzione 16:9 */
+            height: 0;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
 
+    <!-- STEP 1: Scelta Sì / No -->
     <div class="card" id="step1">
-        <h2>Vuoi guardare una pubblicità per ottenere la Key?</h2>
-        <button class="btn" onclick="sceltaSi()">Sì</button>
+        <h2>Vuoi guardare la pubblicità di Enrico Papi (NoiCompriamoAuto.it) per ottenere la Key?</h2>
+        <button class="btn" onclick="mostraPubblicita()">Sì</button>
         <button class="btn btn-no" onclick="sceltaNo()">No</button>
     </div>
 
+    <!-- STEP 2: Schermata Pubblicità con Enrico Papi -->
     <div class="card hidden" id="step2">
-        <h2>Pubblicità in corso...</h2>
-        <p>Attendi 3 secondi...</p>
+        <h2>Messaggio Promozionale</h2>
+        <p>Gusta la pubblicità di Enrico Papi! Dopodiché potrai riscattare la tua key.</p>
+        
+        <!-- Video incorporato di YouTube con la pubblicità di NoiCompriamoAuto / Enrico Papi -->
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/Q4mD6aK4pYQ?autoplay=1&mute=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <p id="timerText" style="color: #ff9800; font-weight: bold;">Attendi 5 secondi...</p>
+        <button class="btn btn-success hidden" id="btnKey" onclick="mostraKey()">Ottieni la Key</button>
     </div>
 
+    <!-- STEP 3: Mostra la Key -->
     <div class="card hidden" id="step3">
         <h2>Ecco la tua Key!</h2>
         <input type="text" id="keyInput" value="ANDRE_29_KEY" readonly>
@@ -78,29 +113,37 @@
     <script>
         function sceltaNo() {
             alert("Hai scelto di no. Accesso negato.");
-            window.location.href = "https://www.google.com"; // Ti fa uscire reindirizzandoti su Google
+            window.location.href = "https://www.google.com";
         }
 
-        function sceltaSi() {
+        function mostraPubblicita() {
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
 
-            // Simula il tempo di una pubblicità (es. 3 secondi)
-            setTimeout(function() {
-                document.getElementById('step2').classList.add('hidden');
-                document.getElementById('step3').classList.remove('hidden');
-            }, 3000); 
-            
-            // Nota: Se vuoi inserire un vero link pubblicitario (es. Linkvertise o Adsterra), 
-            // puoi sostituire il blocco del timer con: window.location.href = "IL_TUO_LINK_PUBBLICITARIO";
+            // Timer di 5 secondi per simulare la visione dello spot pubblicitario
+            let secondi = 5;
+            let timerInterval = setInterval(function() {
+                secondi--;
+                if (secondi > 0) {
+                    document.getElementById('timerText').innerText = "Attendi " + secondi + " secondi...";
+                } else {
+                    clearInterval(timerInterval);
+                    document.getElementById('timerText').style.display = 'none';
+                    document.getElementById('btnKey').classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        function mostraKey() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
         }
 
         function copiaKey() {
             var copyText = document.getElementById("keyInput");
             copyText.select();
-            copyText.setSelectionRange(0, 99999); // Per dispositivi mobili
+            copyText.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(copyText.value);
-            
             document.getElementById("msgCopia").innerText = "Key copiata negli appunti!";
         }
     </script>
